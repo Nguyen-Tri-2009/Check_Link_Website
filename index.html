@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check Link Sống Hay Chết</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-image: url('https://i.imgur.com/SGVUTUE.jpeg'); /* Thay bằng link ảnh của bạn */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+
+    .status {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>ᑕᕼEᑕK ᒪIᑎK ᗯEᗷ / ᖴᗩᑕEᗷOOK đã ᗪIE ᕼᗩY ᑕᕼưᗩ ✔️</h1>
+  <input type="text" id="urlInput" placeholder="Nhập URL..." size="50">
+  <button onclick="checkLink()">Kiểm tra</button>
+  <div class="status" id="status"></div>
+
+  <script>
+    async function checkLink() {
+      const url = document.getElementById("urlInput").value;
+      const statusDiv = document.getElementById("status");
+      statusDiv.textContent = "Đang kiểm tra...";
+      try {
+        const response = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
+        if (response.ok || response.status === 0) {
+          statusDiv.textContent = "ᒪᎥᑎᛕ ᑎàƳ ᑕòᑎ ᔕốᑎǤ ᑕᕼưᗩ ᑕᕼế丅 Đâᑌ ᗴᗰ ✅";
+          statusDiv.style.color = "lightgreen";
+        } else {
+          statusDiv.textContent = `Link CHẾT (Status: ${response.status})`;
+          statusDiv.style.color = "red";
+        }
+      } catch (error) {
+        statusDiv.textContent = "ᒪᎥᑎᛕ ᑎàƳ ᑕᕼế丅 ᗰẹ ᖇồᎥ ᗴᗰ ƠᎥ 🤣";
+        statusDiv.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
